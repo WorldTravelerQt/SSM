@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scxh.ssm.dao.BookMapper">
+    <insert id="addBook" parameterType="Book">
+        insert books(bookName, bookCounts, detail) VALUES (#{bookName},#{bookCounts},#{detail})
+    </insert>
+    <update id="updateBook" parameterType="Book">
+        update books
+        <set>
+            bookName=#{bookName},
+            bookCounts=#{bookCounts},
+            detail=#{detail},
+        </set>
+        where bookId=#{bookId}
+    </update>
+    <delete id="deleteBook">
+        delete from books where bookId=#{bookId}
+    </delete>
+    <select id="findBookByBookName" resultType="Book">
+        select * from books where bookName like #{bookName}
+    </select>
+    <select id="findBookByBookId" resultType="Book">
+        select * from books where bookId=#{bookId}
+    </select>
+    <select id="searchTips" resultType="Book">
+        select bookName from books where bookName like #{bookName} limit 0,5
+    </select>
+    <select id="findAll" resultType="Book">
+        select * from books
+    </select>
+</mapper>
